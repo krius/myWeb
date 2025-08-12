@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>如何防止过拟合 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="这是文章摘要呢！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何防止过拟合">
+<meta property="og:url" content="https://krius.github.io/2025/08/12/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%BF%87%E6%8B%9F%E5%90%88/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="这是文章摘要呢！">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://krius.github.io/myWeb/source/images/%E8%BF%87%E6%8B%9F%E5%90%88.png">
+<meta property="article:published_time" content="2025-08-12T12:14:24.000Z">
+<meta property="article:modified_time" content="2025-08-12T12:14:24.787Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://krius.github.io/myWeb/source/images/%E8%BF%87%E6%8B%9F%E5%90%88.png">
+  
+    <link rel="alternate" href="/myWeb/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/myWeb/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/myWeb/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/myWeb/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/myWeb/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/myWeb/">Home</a>
+        
+          <a class="main-nav-link" href="/myWeb/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/myWeb/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://krius.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-如何防止过拟合" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/myWeb/2025/08/12/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%BF%87%E6%8B%9F%E5%90%88/" class="article-date">
+  <time class="dt-published" datetime="2025-08-12T12:14:24.000Z" itemprop="datePublished">2025-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      如何防止过拟合
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>过拟合具体的表现就是，模型在训练集上表现很好，但是泛化能力差，也就是说在验证集与测试集的效果不佳。过拟合是机器学习和深度学习早期就会面临的障碍，我们要认识到过拟合的本质以及如何“缓解”，下面将介绍几种方法。</p>
+<h2 id="数据增强（Data-Augmentation）"><a href="#数据增强（Data-Augmentation）" class="headerlink" title="数据增强（Data Augmentation）"></a>数据增强（Data Augmentation）</h2><p>通过增加训练集的大小，增加数据的多样性，让模型学习到任务的更多特征，避免记住训练集的特定分布（也就是说我们收集到的数据集，之中的数据分布，不一定与真实分布相同），导致的过拟合现象。对于图像数据，常见的有平移、旋转之类的操作，同时改变颜色图像中添加白噪声等都是常规的操作，需要根据当前的任务特点以及模型特点来考虑。比如图像数据的增强，很多都是基于<strong>卷积神经网络</strong> CNN的<strong>平移不变性</strong>做出来的，<strong>这里的数据增强需要结合模型特点以及任务特点综合考虑。</strong></p>
+<h2 id="模型改进"><a href="#模型改进" class="headerlink" title="模型改进"></a>模型改进</h2><p>过拟合主要是两个原因造成的，<strong>第一是训练数据太少</strong>，数据增强用来解决这个，<strong>第二是模型可学习的参数太多</strong>，就是模型学习能力过强，从而”记住”了训练集的全部分布，并没有学到真实分布的特点，导致的过拟合。所以，可以通过对模型的简单化或者其他方式抑制模型的表达。</p>
+<h3 id="早停（Early-Stopping）"><a href="#早停（Early-Stopping）" class="headerlink" title="早停（Early Stopping）"></a>早停（Early Stopping）</h3><p>通过前面的概念，在数据集适中的情况下，过拟合是模型过度学习的过程，因此可以通过模型在训练过程中验证集的表现来监控模型的变化，模型损失的变化曲线通常来说是一个 <strong>“先降后升”</strong> 的过程，通过监听每一轮训练的验证集损失变化情况，来找到<strong>模型损失的最低点</strong>，这一轮我们通常认为是模型最优的情况，在这之后就是过拟合（overfitting），这之前呢也叫做欠拟合（underfitting），表明模型可以进一步训练达到更好的效果。</p>
+<p><img src="/myWeb/source/images/%E8%BF%87%E6%8B%9F%E5%90%88.png"></p>
+<h3 id="正则化（Regularization）"><a href="#正则化（Regularization）" class="headerlink" title="正则化（Regularization）"></a>正则化（Regularization）</h3><h3 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://krius.github.io/2025/08/12/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%BF%87%E6%8B%9F%E5%90%88/" data-id="cme8i8x9c0003m1u6416jbejl" data-title="如何防止过拟合" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/myWeb/2025/08/12/N-gram/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">N-gram</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/myWeb/archives/2025/08/">August 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/myWeb/2025/08/12/%E5%A6%82%E4%BD%95%E9%98%B2%E6%AD%A2%E8%BF%87%E6%8B%9F%E5%90%88/">如何防止过拟合</a>
+          </li>
+        
+          <li>
+            <a href="/myWeb/2025/08/12/N-gram/">N-gram</a>
+          </li>
+        
+          <li>
+            <a href="/myWeb/2025/08/12/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/myWeb/" class="mobile-nav-link">Home</a>
+  
+    <a href="/myWeb/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/myWeb/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/myWeb/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/myWeb/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
